@@ -12,7 +12,7 @@ let LW_TRESHOLD = 50; // Пороговое значение для опреде
 
 let ULTRASONIC_RESPONCE_DISTANCE = 30; // Дистанция, на которую реагировать
 
-let DIST_ROLLING_MOVE_OUT = 20; // Дистанция для прокатки без торможения на перекрёстке в мм
+let DIST_ROLLING_MOVE_OUT = 30; // Дистанция для прокатки без торможения на перекрёстке в мм
 
 let MANIP_DEFL_SPEED = 40; // Скорость работы манипулятора по умолчанию
 
@@ -21,8 +21,8 @@ let MANIPULATOR_MOTOR = motors.mediumA; // Ссылка на объект мот
 let CHASSIS_L_MOTOR = motors.mediumB; // Ссылка на объект левого мотора в шасси
 let CHASSIS_R_MOTOR = motors.mediumC; // Ссылка на объект правого мотора в шасси
 
-let L_CS = sensors.color2; // Ссылка на объект левого датчика цвета
-let R_CS = sensors.color3; // Ссылка на объект правого датчика цвета
+let LCS = sensors.color2; // Ссылка на объект левого датчика цвета
+let RCS = sensors.color3; // Ссылка на объект правого датчика цвета
 
 let WHEELS_D = 68.8; // Диаметер колёс в мм
 let WHEELS_W = 190; // Расстояние между центрами колёс в мм
