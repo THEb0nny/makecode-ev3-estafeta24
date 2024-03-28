@@ -40,10 +40,10 @@ function Main() { // Определение главной функции
     Manipulator(ClawState.Open);
     brick.printString("RUN", 6, 14);
     while (true) {
-        if (brick.buttonLeft.isPressed()) {
+        if (brick.buttonLeft.isPressed()) { // Если нажато влево, то это первый робот, который начинает
             robotRole = RobotOrder.Master;
             break;
-        } else if (brick.buttonRight.isPressed()) {
+        } else if (brick.buttonRight.isPressed()) { // Если нажато вправо, то это второй робот
             robotRole = RobotOrder.Slave;
             break;
         } else if (brick.buttonUp.isPressed()) {
