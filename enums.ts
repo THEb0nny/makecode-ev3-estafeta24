@@ -1,4 +1,6 @@
 const enum RobotOrder {
+    //% block="нет"
+    None,
     //% block="ведущий"
     Master,
     //% block="ведомый"

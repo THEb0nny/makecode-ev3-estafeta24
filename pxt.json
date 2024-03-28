@@ -1,6 +1,6 @@
 {
     "name": "Estafeta24",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "description": "Программа для соревнования Эстафета",
     "dependencies": {
         "ev3": "*",
@@ -13,7 +13,8 @@
         "custom.ts",
         "motions.ts",
         "lw.ts",
-        "enums.ts"
+        "enums.ts",
+        "turn.ts"
     ],
     "testFiles": [
         "test.ts"

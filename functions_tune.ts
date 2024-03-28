@@ -23,7 +23,8 @@ namespace custom {
         ];
         const SCREEN_WHITH_PID: boolean[] = [true, true, true, true, true, true, true, false, false, false, false, false, false];
         let PARAMS_VALUES: number[][] = [ // Коэффициенты, оторажаемые на экране
-            [LW_KP_2S, LW_KI_2S, LW_KD_2S, LW_SPEED],
+            // [LW_KP_2S, LW_KI_2S, LW_KD_2S, LW_SPEED],
+            [0, 0, 0, 0],
         ];
         let PARAMS_VALUES_H: number[][] = [ // Размер шагов для коэффициентов
             [0.05, 0.001, 0.1, 5],
@@ -148,11 +149,11 @@ namespace custom {
                     control.runInParallel(function () { music.playTone(Note.D, 100); }); // Сигнал, что было запущено
                     // Запускаем выполнение теста
                     if (screen == 0) {
-                        LW_KP_2S = PARAMS_VALUES[screen][0];
-                        LW_KI_2S = PARAMS_VALUES[screen][1];
-                        LW_KD_2S = PARAMS_VALUES[screen][2];
-                        LW_SPEED = PARAMS_VALUES[screen][3];
-                        motions.LineFollowToIntersaction(true);
+                        // LW_KP_2S = PARAMS_VALUES[screen][0];
+                        // LW_KI_2S = PARAMS_VALUES[screen][1];
+                        // LW_KD_2S = PARAMS_VALUES[screen][2];
+                        // LW_SPEED = PARAMS_VALUES[screen][3];
+                        motions.LineFollowToIntersaction(AfterMotion.BreakStop);
                     }
                 } else { // Если нажали на обычную строку с параметром, то подтверждаем для возможности его изменения
                     if (confirm) control.timer1.reset(); // Костыль от переключения экрана после изменения коэффициента и применения
