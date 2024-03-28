@@ -1,32 +1,43 @@
 const enum RobotOrder {
-    //% block="нет"
+    //% block="no"
+    //% block.loc.ru="нет"
     None,
-    //% block="ведущий"
+    //% block="master"
+    //% block.loc.ru="ведущий"
     Master,
-    //% block="ведомый"
+    //% block="slave"
+    //% block.loc.ru="ведомый"
     Slave
 }
 
 // Перечисление о вариантах работы манипулятора
 const enum ClawState {
-    //% block="открыть"
+    //% block="open"
+    //% block.loc.ru="открыть"
     Open,
-    //% block="закрыть"
+    //% block="close"
+    //% block.loc.ru="закрыть"
     Close
 }
 
 // Перечисление о типах торможения полный вариант
 const enum AfterMotion {
-    //% block="прокатка"
+    //% block="rolling"
+    //% block.loc.ru="прокатка"
     Rolling,
-    //% block="плавная прокатка"
+    //% block="decel rolling"
+    //% block.loc.ru="плавная прокатка"
     DecelRolling,
-    //% block="прокатка без торможения"
+    //% block="rolling no stop"
+    //% block.loc.ru="прокатка без торможения"
     RollingNoStop,
-    //% block="тормоз с удержанием"
+    //% block="brake stop"
+    //% block.loc.ru="тормоз с удержанием"
     BreakStop,
-    //% block="тормоз с инерцией"
+    //% block="no break stop"
+    //% block.loc.ru="тормоз с инерцией"
     NoBreakStop,
-    //% block="не тормозить"
+    //% block="no stop"
+    //% block.loc.ru="не тормозить"
     NoStop
 }

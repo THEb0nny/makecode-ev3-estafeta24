@@ -130,8 +130,8 @@ namespace motions {
             let currTime = control.millis();
             let dt = currTime - prevTime;
             prevTime = currTime;
-            let refRawLCS = LCS.light(LightIntensityMode.ReflectedRaw); // Сырое значение с левого датчика цвета
-            let refRawRCS = RCS.light(LightIntensityMode.ReflectedRaw); // Сырое значение с правого датчика цвета
+            let refRawLCS = L_COLOR_SEN.light(LightIntensityMode.ReflectedRaw); // Сырое значение с левого датчика цвета
+            let refRawRCS = R_COLOR_SEN.light(LightIntensityMode.ReflectedRaw); // Сырое значение с правого датчика цвета
             let refLCS = sensors.GetNormRefValCS(refRawLCS, B_RAW_REF_LCS, W_RAW_REF_LCS); // Нормализованное значение с левого датчика цвета
             let refRCS = sensors.GetNormRefValCS(refRawRCS, B_RAW_REF_RCS, W_RAW_REF_RCS); // Нормализованное значение с правого датчика цвета
             if (refLCS < LW_TRESHOLD && refRCS < LW_TRESHOLD) break;
@@ -177,8 +177,8 @@ namespace motions {
             prevTime = currTime; // Новое время в переменную предыдущего времени
             let lMotEnc = CHASSIS_L_MOTOR.angle(), rMotEnc = CHASSIS_R_MOTOR.angle(); // Значения с энкодеров моторы
             if (Math.abs(lMotEnc - lMotEncPrev) >= Math.abs(calcMotRot) || Math.abs(rMotEnc - rMotEncPrev) >= Math.abs(calcMotRot)) break;
-            let refRawLCS = LCS.light(LightIntensityMode.ReflectedRaw); // Сырое значение с левого датчика цвета
-            let refRawRCS = RCS.light(LightIntensityMode.ReflectedRaw); // Сырое значение с правого датчика цвета
+            let refRawLCS = L_COLOR_SEN.light(LightIntensityMode.ReflectedRaw); // Сырое значение с левого датчика цвета
+            let refRawRCS = R_COLOR_SEN.light(LightIntensityMode.ReflectedRaw); // Сырое значение с правого датчика цвета
             let refLCS = sensors.GetNormRefValCS(refRawLCS, B_RAW_REF_LCS, W_RAW_REF_LCS); // Нормализованное значение с левого датчика цвета
             let refRCS = sensors.GetNormRefValCS(refRawRCS, B_RAW_REF_RCS, W_RAW_REF_RCS); // Нормализованное значение с правого датчика цвета
             let error = refLCS - refRCS; // Ошибка регулирования

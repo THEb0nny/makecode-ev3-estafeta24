@@ -21,8 +21,9 @@ let MANIPULATOR_MOTOR = motors.mediumA; // Ссылка на объект мот
 let CHASSIS_L_MOTOR = motors.mediumB; // Ссылка на объект левого мотора в шасси
 let CHASSIS_R_MOTOR = motors.mediumC; // Ссылка на объект правого мотора в шасси
 
-let LCS = sensors.color2; // Ссылка на объект левого датчика цвета
-let RCS = sensors.color3; // Ссылка на объект правого датчика цвета
+let L_COLOR_SEN = sensors.color2; // Ссылка на объект левого датчика цвета
+let R_COLOR_SEN = sensors.color3; // Ссылка на объект правого датчика цвета
+let ULTRASONIC_SEN = sensors.ultrasonic4; // Ссылка на объкт ультразвукового датчика
 
 let WHEELS_D = 68.8; // Диаметер колёс в мм
 let WHEELS_W = 190; // Расстояние между центрами колёс в мм
@@ -35,21 +36,18 @@ let robotRole = RobotOrder.None;
 
 function Main() { // Определение главной функции
     MANIPULATOR_MOTOR.setInverted(false); // Инверсия мотора манипулятора
-    CHASSIS_L_MOTOR.setInverted(true); CHASSIS_R_MOTOR.setInverted(false);
+    CHASSIS_L_MOTOR.setInverted(true); CHASSIS_R_MOTOR.setInverted(false); // Установить инверсию для манипулятора, если требуется
     Manipulator(ClawState.Open);
     brick.printString("RUN", 6, 14);
-    let startBtn = "NONE";
     while (true) {
         if (brick.buttonLeft.isPressed()) {
-            startBtn = "LEFT";
             robotRole = RobotOrder.Master;
             break;
         } else if (brick.buttonRight.isPressed()) {
-            startBtn = "RIGHT";
             robotRole = RobotOrder.Slave;
             break;
         } else if (brick.buttonUp.isPressed()) {
-            startBtn = "UP" ;
+            custom.FunctionsTune(0);
             break;
         }
         pause(5);
@@ -63,7 +61,7 @@ function Main() { // Определение главной функции
         while (true) {
             Krug();
             Podgotovka();
-            pauseUntil(() => sensors.ultrasonic4.distance() < 20);
+            pauseUntil(() => ULTRASONIC_SEN.distance() < 20);
             pause(1500);
             motions.LineFollowToDist(25, AfterMotion.BreakStop);
             Manipulator(ClawState.Close);
@@ -72,15 +70,13 @@ function Main() { // Определение главной функции
     } else if (robotRole == RobotOrder.Slave) {
         while(true) {
             Podgotovka();
-            pauseUntil(() => sensors.ultrasonic4.distance() < 20);
+            pauseUntil(() => ULTRASONIC_SEN.distance() < 20);
             pause(1500);
             motions.LineFollowToDist(25, AfterMotion.BreakStop);
             Manipulator(ClawState.Close);
             turns.SpinTurn(180, 40);
             Krug();
         }
-    } else if (startBtn == "UP") {
-        custom.FunctionsTune(0);
     }
 }
 

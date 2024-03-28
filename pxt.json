@@ -14,7 +14,8 @@
         "motions.ts",
         "lw.ts",
         "enums.ts",
-        "turn.ts"
+        "turn.ts",
+        "ns.ts"
     ],
     "testFiles": [
         "test.ts"
