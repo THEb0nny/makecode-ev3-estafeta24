@@ -56,47 +56,43 @@ function Main() { // Определение главной функции
     pauseUntil(() => brick.buttonUp.wasPressed() || brick.buttonDown.wasPressed() || brick.buttonLeft.wasPressed() || brick.buttonRight.wasPressed() || brick.buttonEnter.wasPressed());
     brick.clearScreen();
     if (robotRole == RobotOrder.Master) {
-        motions.LineFollowToDist(25, AfterMotion.BreakStop, { speed: 20, Kp: 0.8, Kd: 2.6 });
-        Manipulator(ClawState.Close);
-        while (true) {
-            Krug();
-            Podgotovka();
-            pauseUntil(() => ULTRASONIC_SEN.distance() < 20);
-            pause(1500);
-            motions.LineFollowToDist(25, AfterMotion.BreakStop);
-            Manipulator(ClawState.Close);
-            turns.SpinTurn(180, 40);
-        }
-    } else if (robotRole == RobotOrder.Slave) {
-        while(true) {
-            Podgotovka();
-            pauseUntil(() => ULTRASONIC_SEN.distance() < 20);
-            pause(1500);
-            motions.LineFollowToDist(25, AfterMotion.BreakStop);
-            Manipulator(ClawState.Close);
-            turns.SpinTurn(180, 40);
-            Krug();
-        }
+        motions.LineFollowToDist(25, AfterMotion.BreakStop, {speed: 20, Kp: 0.8, Kd: 2.6}); // Подъехать к банке, чтобы схватить
+        Manipulator(ClawState.Close); // Схватить банку
+        DriveLap(); // Проезжаем один круг
+        robotRole = RobotOrder.Slave; // Устанавливаем роль ведомого
+    }
+    while (true) {
+        TransferPreparing();
+        pauseUntil(() => ULTRASONIC_SEN.distance() < 20); // Ждать, что УЗ датчик увидит как подъехали для передачи
+        pause(1500);
+        motions.LineFollowToDist(25, AfterMotion.BreakStop); // Проехать чуть вперёд для захвата банки
+        Manipulator(ClawState.Close); // Взять банку
+        turns.SpinTurn(180, 40); // Развернуться
+        robotRole = RobotOrder.Master; // Устанавливаем роль ведущего
+        DriveLap(); // Проезжаем один круг
     }
 }
 
-function Krug() {
-    motions.LineFollowToDist(1500, AfterMotion.NoStop, { speed: 70, Kp: 0.8, Kd: 2.6 });
+// Функция для движения одного круга
+function DriveLap() {
+    motions.LineFollowToDist(1500, AfterMotion.NoStop, { speed: 70 }); // Двигаться вначале на дистанцию без торможения
+    // Для горки
     // motions.LineFollowToDist(100, AfterMotion.NoStop, { speed: 60 });
     // motions.LineFollowToIntersaction(AfterMotion.NoStop, { speed: 50 });
     // motions.LineFollowToDist(500, AfterMotion.NoStop, { speed: 50 });
     // motions.LineFollowToDist(1500, AfterMotion.NoStop, { speed: 70 });
-    motions.LineFollowToIntersaction(AfterMotion.NoStop);
-    motions.LineFollowToDist(250, AfterMotion.BreakStop, { speed: 50 });
-    Manipulator(ClawState.Open, 20);
-    motions.DistMove(100, -20, true);
+    motions.LineFollowToIntersaction(AfterMotion.NoStop); // Двигаться до конца круга
+    motions.LineFollowToDist(250, AfterMotion.BreakStop, { speed: 50 }); // Двигаться по линии для передачи нужное расстояние
+    Manipulator(ClawState.Open, 20); // Поставить банку
+    motions.DistMove(100, -20, true); // Отъехать от банки
 }
 
-function Podgotovka() {
-    pause(1000);
-    motions.LineFollowToIntersaction(AfterMotion.BreakStop, { speed: 40 });
-    turns.SpinTurn(180, 40);
-    motions.LineFollowToDist(200, AfterMotion.BreakStop, { speed: 40 });
+// Функция подготовки к получению банки
+function TransferPreparing() {
+    pauseUntil(() => ULTRASONIC_SEN.distance() > 50, 5000); // Ждать, что УЗ датчик увидит как отъехали с зоны
+    motions.LineFollowToIntersaction(AfterMotion.BreakStop, { speed: 40 }); // Движение до перекрёстка зоны
+    turns.SpinTurn(180, 40); // Разворот, чтобы принять банку
+    motions.LineFollowToDist(200, AfterMotion.BreakStop, { speed: 40 }); // Подъехать для принятия банки
 }
 
 Main(); // Запуск главной функции
