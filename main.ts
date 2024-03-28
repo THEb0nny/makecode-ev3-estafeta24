@@ -10,9 +10,9 @@ const W_RAW_REF_RCS = 563; // Белый для правого датчика
 
 let LW_TRESHOLD = 50; // Пороговое значение для определение перекрёстка
 
-let LW_DIST_TO_LET = 30; // Дистанция, на которую реагировать на препятствие
+let ULTRASONIC_RESPONCE_DISTANCE = 30; // Дистанция, на которую реагировать
 
-let DIST_ROLLING_MOVE_OUT = 20; // Дистанция для прокатки без торможения на перекрёстке в мс
+let DIST_ROLLING_MOVE_OUT = 20; // Дистанция для прокатки без торможения на перекрёстке в мм
 
 let MANIP_DEFL_SPEED = 40; // Скорость работы манипулятора по умолчанию
 
@@ -34,7 +34,7 @@ let robotRole = RobotOrder.None;
 // turns.SpinTurn(90, 30);
 
 function Main() { // Определение главной функции
-    CHASSIS_L_MOTOR.setInverted(false); // Инверсия мотора манипулятора
+    MANIPULATOR_MOTOR.setInverted(false); // Инверсия мотора манипулятора
     CHASSIS_L_MOTOR.setInverted(true); CHASSIS_R_MOTOR.setInverted(false);
     Manipulator(ClawState.Open);
     brick.printString("RUN", 6, 14);
