@@ -23,7 +23,7 @@ namespace control {
     export function PauseUntilTime(startTime: number, ms: number) {
         if (startTime == 0) startTime = control.millis();
         const waitCompletionTime = startTime + ms;
-        while (control.millis() < waitCompletionTime) loops.pause(0.0001);
+        while (control.millis() < waitCompletionTime) loops.pause(0.01);
     }
 
 }

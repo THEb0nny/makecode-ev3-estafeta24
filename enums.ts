@@ -1,3 +1,10 @@
+const enum RobotOrder {
+    //% block="ведущий"
+    Master,
+    //% block="ведомый"
+    Slave
+}
+
 // Перечисление о вариантах работы манипулятора
 const enum ClawState {
     //% block="открыть"
